@@ -1,12 +1,15 @@
 services:
   ldap:
-    image: dcm4che/slapd-dcm4chee:2.6.10-34.3
-    environment:
-      LDAP_URLS: "ldap:/// ldaps:///"
+    build:
+      context: .
     ports:
       - "389:389"
       - "636:636"
-    env_file: docker-compose.env
-    volumes:
-      - /var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data
-      - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d
+    environment:
+      - STORAGE_URI=jclouds:s3:http://minio:9000
+      - STORAGE_BUCKET_NAME=dicom-bucket
+      - STORAGE_BUCKET_ENDPOINT=http://minio:9000
+      - STORAGE_BUCKET_PASSWORD=minioadmin
+      - STORAGE_BUCKET_USERNAME=minioadmin
+      - STORAGE_BUCKET_PATHSTYLE=true
+      - STORAGE_BUCKET_VIRTHOST=false

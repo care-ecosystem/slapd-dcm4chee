@@ -41,7 +41,10 @@ ENV LDAP_INIT_CMDS=/etc/openldap/configure.sh \
     SYSLOG_PORT=514 \
     SYSLOG_PROTOCOL=UDP \
     SYSLOG_TLS_PORT=6514 \
-    STORAGE_DIR=/opt/wildfly/standalone/data/fs1
+    LDAP_BASE_DN=dc=dcm4che,dc=org \
+    LDAP_ORGANISATION=dcm4che.org \
+    LDAP_ROOTPASS=secret \
+    LDAP_CONFIGPASS=secret
 
 COPY ldap /etc/openldap
 COPY bin /usr/bin
